@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[883],{7883:(l,e,s)=>{s.r(e),s.d(e,{default:()=>t});const t=(0,s(1900).Z)({},(function(){return(0,this._self._c)("div",{staticClass:"flex-auto w-full h-full box-border p-6 overflow-hidden flex flex-col relative"},[this._v("dashboard")])}),[],!1,null,null,null).exports}}]);
