@@ -98,7 +98,7 @@
 </template>
 
 <script>
-// import { mapActions } from "vuex"
+import { mapActions } from "vuex"
 export default {
     name: 'Sidebar',
     data(){
@@ -106,15 +106,15 @@ export default {
             isShow: false,
         }
     },
-    // methods: {
-    //     ...mapActions({
-    //         signOut: "auth/signOut"
-    //     }),
-    //     logOut(){
-    //         this.signOut().then(() => {
-    //             location.reload();
-    //         })
-    //     },
-    // }
+    methods: {
+        ...mapActions({
+            signOut: "auth/signOut"
+        }),
+        logOut(){
+            this.signOut().then(() => {
+                location.reload();
+            })
+        },
+    }
 }
 </script>
