@@ -297,7 +297,7 @@ class Fuzzy extends Model
         $min = $var['produksi']['min'];
         $max = $var['produksi']['max'];
 
-        $hasil = $produksi == 'sedikit' ? $max - ($predikat * ($max - $min)) : ($predikat * ($max - $min)) - $max;
+        $hasil = $produksi == 'sedikit' ? $max - ($predikat * ($max - $min)) : ($predikat * ($max - $min)) + $max;
 
         return (float) $hasil;
     }
