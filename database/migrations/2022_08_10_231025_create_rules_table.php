@@ -15,10 +15,11 @@ class CreateRulesTable extends Migration
     {
         Schema::create('rules', function (Blueprint $table) {
             $table->id();
-            $table->char('r1');
-            $table->char('r2');
-            $table->char('r3');
-            $table->char('produksi');
+            $table->string('nama');
+            $table->string('r1');
+            $table->string('r2');
+            $table->string('r3');
+            $table->string('produksi');
             $table->timestamps();
         });
     }

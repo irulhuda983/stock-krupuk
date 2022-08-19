@@ -20,10 +20,10 @@ class CreateDatasetTable extends Migration
             $table->string('minggu_ke')->nullable();
             $table->string('bulan')->nullable();
             $table->string('tahun')->nullable();
-            $table->string('persediaan')->nullable();
-            $table->string('permintaan')->nullable();
-            $table->string('penjualan')->nullable();
-            $table->string('produksi')->nullable();
+            $table->float('persediaan')->nullable();
+            $table->float('permintaan')->nullable();
+            $table->float('penjualan')->nullable();
+            $table->float('produksi')->nullable();
             $table->timestamps();
         });
     }

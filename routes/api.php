@@ -21,29 +21,36 @@ Route::get('/profil', 'AuthController@profil')->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->group(function(){
 
+    Route::prefix('dashboard')->group(function() {
+        Route::get('/grafik', 'DashboardController@grafik');
+    });
+
     Route::prefix('dataset')->group(function() {
         Route::get('/', 'DatasetController@index');
         Route::get('/{dataset}', 'DatasetController@show');
         Route::post('/store', 'DatasetController@store');
         Route::post('/import', 'DatasetController@import');
         Route::post('/{dataset}/update', 'DatasetController@update');
-        Route::delete('/{dataset}/delete', 'DatasetController@delete');
+        Route::delete('/{dataset}/delete', 'DatasetController@destroy');
     });
 
     Route::prefix('rules')->group(function() {
         Route::get('/', 'RulesController@index');
         Route::get('/{rules}', 'RulesController@show');
+        Route::post('/import', 'RulesController@import');
         Route::post('/store', 'RulesController@store');
         Route::post('/{rules}/update', 'RulesController@update');
-        Route::delete('/{rules}/delete', 'RulesController@delete');
+        Route::delete('/{rules}/delete', 'RulesController@destroy');
     });
 
     Route::prefix('prediksi')->group(function() {
         Route::get('/', 'PrediksiController@index');
-        Route::get('/{prediksi}', 'PrediksiController@show');
+        Route::get('/{prediksi}/show', 'PrediksiController@show');
+        Route::get('/fuzzy/{id}', 'PrediksiController@fuzzyfikasi');
+        Route::get('/show-prediksi', 'PrediksiController@showPrediksi');
         Route::post('/store', 'PrediksiController@store');
         Route::post('/{prediksi}/update', 'PrediksiController@update');
-        Route::delete('/{prediksi}/delete', 'PrediksiController@delete');
+        Route::delete('/{prediksi}/delete', 'PrediksiController@destroy');
     });
 
 });

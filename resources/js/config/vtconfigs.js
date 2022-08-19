@@ -6,7 +6,7 @@ import {
     TSelect,
     // TRadio,
     // TCheckbox,
-    // TButton,
+    TButton,
     // TInputGroup,
     // TCard,
     // TAlert,
@@ -219,13 +219,13 @@ import {
       props: {
         classes: {
           wrapper: 'table border-collapse text-center bg-white mx-auto shadow-sm',
-          element: 'w-4 h-4 lg:w-6 lg:h-6 2xl:w-8 2xl:h-8 border border-gray-200 table-cell hover:border-orange-100',
-          activeElement: 'w-4 h-4 lg:w-6 lg:h-6 2xl:w-8 2xl:h-8 border border-gray-200 border-orange-500 table-cell hover:border-orange-600',
+          element: 'w-4 h-4 lg:w-6 lg:h-6 2xl:w-8 2xl:h-8 border border-gray-200 table-cell hover:border-blue-100',
+          activeElement: 'w-4 h-4 lg:w-6 lg:h-6 2xl:w-8 2xl:h-8 border border-gray-200 border-blue-500 table-cell hover:border-blue-600',
           disabledElement: 'w-4 h-4 lg:w-6 lg:h-6 2xl:w-8 2xl:h-8 border border-gray-200 table-cell',
           ellipsisElement: 'w-4 h-4 lg:w-6 lg:h-6 2xl:w-8 2xl:h-8 border border-gray-200 hidden md:table-cell',
-          activeButton: 'bg-orange-500 w-full h-full text-white hover:bg-orange-600 transition duration-100 ease-in-out focus:ring-2 focus:ring-orange-500 focus:outline-none focus:ring-opacity-50',
+          activeButton: 'bg-blue-500 w-full h-full text-white hover:bg-blue-600 transition duration-100 ease-in-out focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50',
           disabledButton: 'opacity-25 w-full h-full cursor-not-allowed transition duration-100 ease-in-out',
-          button: 'hover:bg-orange-100 w-full h-full transition duration-100 ease-in-out focus:ring-2 focus:ring-orange-500 focus:outline-none focus:ring-opacity-50',
+          button: 'hover:bg-blue-100 w-full h-full transition duration-100 ease-in-out focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50',
           ellipsis: ''
         },
         variants: {
@@ -235,9 +235,9 @@ import {
             activeElement: 'w-4 h-4 lg:w-6 lg:h-6 2xl:w-8 2xl:h-8 rounded-full',
             disabledElement: 'w-4 h-4 lg:w-6 lg:h-6 2xl:w-8 2xl:h-8 rounded-full',
             ellipsisElement: 'w-4 h-4 lg:w-6 lg:h-6 2xl:w-8 2xl:h-8 rounded-full hidden md:inline',
-            activeButton: 'border border-orange-500 bg-orange-500 w-full h-full rounded-full text-white hover:bg-orange-600 transition duration-100 ease-in-out focus:ring-2 focus:ring-orange-500 focus:outline-none focus:ring-opacity-50',
+            activeButton: 'border border-blue-500 bg-blue-500 w-full h-full rounded-full text-white hover:bg-blue-600 transition duration-100 ease-in-out focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50',
             disabledButton: 'border border-gray-200  opacity-25 w-full h-full rounded-full cursor-not-allowed transition duration-100 ease-in-out',
-            button: 'border border-gray-200 hover:bg-orange-100 hover:border-orange-100 rounded-full w-full h-full transition duration-100 ease-in-out focus:ring-2 focus:ring-orange-500 focus:outline-none focus:ring-opacity-50',
+            button: 'border border-gray-200 hover:bg-blue-100 hover:border-blue-100 rounded-full w-full h-full transition duration-100 ease-in-out focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50',
             ellipsis: ''
           }
         }
@@ -290,6 +290,21 @@ import {
         }
       }
     },
+
+    // button
+    't-button': {
+      component: TButton,
+      props: {
+        fixedClasses: 'block px-4 py-2 transition duration-100 ease-in-out focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
+        classes: 'text-white bg-blue-500 border border-transparent shadow-sm rounded hover:bg-blue-600',
+        variants: {
+          secondary: 'text-gray-800 bg-white border border-gray-300 shadow-sm hover:text-gray-600',
+          error: 'text-white bg-red-500 border border-transparent rounded shadow-sm hover:bg-red-600',
+          success: 'text-white bg-green-500 border border-transparent rounded shadow-sm hover:bg-green-600',
+          link: 'text-blue-500 underline hover:text-blue-600'
+        }
+      }
+    }
 
   }
 

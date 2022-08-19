@@ -15,9 +15,8 @@ class Dataset extends Model
 
     public function scopeSearch($query, $search)
     {
-        if($search)
-        {
-            return $query->where('minggu_ke', $search);
+        if($search){
+            $query->whereRaw("CONCAT(bulan, '||', minggu_ke) LIKE ?", ['%'.addcslashes($search, '_').'%']);
         }
 
         return $query;
