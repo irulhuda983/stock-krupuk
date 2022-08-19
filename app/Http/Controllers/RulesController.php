@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Rules;
 use App\Http\Resources\RulesResource;
+use App\Imports\RulesImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RulesController extends Controller
 {
     public function index(Request $request)
     {
-        $data = Rules::paginate($request->total ?? 10);
+        $data = Rules::paginate($request->limit ?? 30);
 
         return RulesResource::collection($data);
     }
@@ -18,6 +20,21 @@ class RulesController extends Controller
     public function show(Rules $rules)
     {
         return new RulesResource($rules);
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|max:10000|mimes:xlsx,xls'
+        ]);
+
+        $path = $request->file('file');
+
+        Excel::import(new RulesImport, $path);
+
+        return response()->json([
+            'status' => 'success',
+        ]);
     }
 
     public function store(Request $request)

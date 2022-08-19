@@ -5,9 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Prediksi;
 use App\Http\Resources\PrediksiResource;
+use App\Models\Fuzzy;
+use App\Models\Dataset;
+use App\Models\Rules as Rule;
 
 class PrediksiController extends Controller
 {
+    protected $fuzzy;
+
+    public function __construct()
+    {
+        $this->fuzzy = new Fuzzy();
+    }
+
     public function index(Request $request)
     {
         $data = Prediksi::paginate($request->total ?? 10);
@@ -87,5 +97,17 @@ class PrediksiController extends Controller
             'message' => 'Berhasil hapus Prediksi',
             'data' => new PrediksiResource($data),
         ], 200);
+    }
+
+    public function showPrediksi(Request $request)
+    {
+        $data = $this->fuzzy->getFuzzy($request->all());
+
+        return response()->json($data, 200);
+    }
+
+    public function rule()
+    {
+        return response()->json(Rule::all());
     }
 }

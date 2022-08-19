@@ -13,7 +13,7 @@ class DatasetController extends Controller
     
     public function index(Request $request)
     {
-        $data = Dataset::paginate($request->total ?? 10);
+        $data = Dataset::search($request->cari)->orderBy('created_at', 'DESC')->paginate($request->limit ?? 10);
 
         return DatasetResource::collection($data);
     }
@@ -92,7 +92,7 @@ class DatasetController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Berhasil ubah dataset',
-            'data' => new DatasetResource($data),
+            // 'data' => new DatasetResource($data),
         ], 200);
     }
 
@@ -103,7 +103,7 @@ class DatasetController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Berhasil hapus dataset',
-            'data' => new DatasetResource($data),
+            'data' => new DatasetResource($dataset),
         ], 200);
     }
 }

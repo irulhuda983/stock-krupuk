@@ -14,6 +14,15 @@ class DatasetResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'minggu_ke' => $this->minggu_ke,
+            'bulan' => date('M', strtotime('01-'.$this->bulan.'-'.$this->tahun)),
+            'tahun' => $this->tahun,
+            'persediaan' => $this->persediaan,
+            'permintaan' => $this->permintaan,
+            'penjualan' => $this->penjualan,
+            'produksi' => $this->produksi,
+        ];
     }
 }
