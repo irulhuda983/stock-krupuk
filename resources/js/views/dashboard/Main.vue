@@ -1,9 +1,7 @@
 <template>
-    <div class="flex-auto w-full h-full box-border p-6 overflow-hidden flex flex-col relative">
+    <div class="flex-auto w-full h-full box-border p-6 overflow-hidden flex relative space-x-3">
         <div class="h-full w-full bg-white rounded-2xl filter drop-shadow-base">
-            <div
-                class="h-1/7 ml-4 flex text-sm text-gray-800 items-center 2xl:text-md"
-            >
+            <div class="h-1/7 ml-4 flex text-sm text-gray-800 items-center 2xl:text-md">
                 <span class="font-bold">Statistik Produksi Barang</span>
                 <!-- &nbsp;<span>(01-31 Januari 2022)</span> -->
             </div>
@@ -19,7 +17,13 @@
                 ></apexchart>
             </div>
         </div>
-        </div>
+
+        <!-- <div class="h-full w-1/4 bg-white rounded-2xl filter drop-shadow-base">
+            <div>
+
+            </div>
+        </div> -->
+    </div>
 </template>
 
 <script>

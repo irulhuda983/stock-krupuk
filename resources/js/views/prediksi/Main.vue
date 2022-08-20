@@ -164,6 +164,7 @@
                             <th class="p-3 whitespace-nowrap capitalize text-left sticky top-0 bg-white">Persediaan</th>
                             <th class="p-3 whitespace-nowrap capitalize text-left sticky top-0 bg-white">ai</th>
                             <th class="p-3 whitespace-nowrap capitalize text-left sticky top-0 bg-white">zi</th>
+                            <th class="p-3 whitespace-nowrap capitalize text-left sticky top-0 bg-white">ai * zi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -175,6 +176,7 @@
                                 <td class="px-3 py-4 border-b border-gray-200 whitespace-nowrap capitalize">{{ format(item.persediaan) }}</td>
                                 <td class="px-3 py-4 border-b border-gray-200 whitespace-nowrap capitalize">{{ format(item.predikat) }}</td>
                                 <td class="px-3 py-4 border-b border-gray-200 whitespace-nowrap capitalize">{{ format(item.hasil_predikat) }}</td>
+                                <td class="px-3 py-4 border-b border-gray-200 whitespace-nowrap capitalize">{{ format(item.perkalian) }}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -7,9 +7,10 @@
                 <div class="flex items-center mb-12">
                     <div class="w-full">
                         <div class="text-base lg:text-2xl uppercase font-bold lg:mb-6">Login Akun</div>
-                        <div class="text-2xl lg:text-4xl font-semibold lg:font-bold mb-3">
+                        <div class="text-2xl lg:text-4xl font-semibold lg:font-bold">
                             PREDIKSI STOCK
                         </div>
+                        <div class="text-2xs lg:text-sm mb-3">Aplikasi Untuk memprediksi stock barang</div> 
                         <div class="text-2xs lg:text-sm">Masukkan username dan password untuk melanjutkan.</div>
                     </div>
                 </div>
@@ -67,9 +68,9 @@
             <div class="hidden lg:block box-border w-1/2 h-full">
                 <div class="w-full h-full box-border flex flex-col items-center justify-center">
 
-                    <div class="w-full box-border">
-                        <!-- <img src="/images/logo-betakun.png" alt="" class="w-full"> -->
-                        Aplikasi Untuk memprediksi stock barang
+                    <div class="w-full box-border flex flex-col justify-center items-center">
+                        <img src="/images/new_logo.png" alt="" class="w-full">
+                        <!-- <div>Aplikasi Untuk memprediksi stock barang</div> -->
                     </div>
                 </div>
             </div>

@@ -101,11 +101,129 @@ class Fuzzy extends Model
         return $data;
     }
 
+    public function getFuzzy($nilai)
+    {
+        
+        $fuzzyfikasi = [
+            'permintaan' => [
+                'sedikit' => $this->permintaan_sedikit($nilai['permintaan']),
+                'sedang' => $this->permintaan_sedang($nilai['permintaan']),
+                'banyak' => $this->permintaan_banyak($nilai['permintaan']),
+            ],
+            'penjualan' => [
+                'sedikit' => $this->penjualan_sedikit($nilai['penjualan']),
+                'sedang' => $this->penjualan_sedang($nilai['penjualan']),
+                'banyak' => $this->penjualan_banyak($nilai['penjualan']),
+            ],
+            'persediaan' => [
+                'sedikit' => $this->persediaan_sedikit($nilai['persediaan']),
+                'sedang' => $this->persediaan_sedang($nilai['persediaan']),
+                'banyak' => $this->persediaan_banyak($nilai['persediaan']),
+            ],
+        ];
+
+        return [
+            'variable' => $this->variable(),
+            'fuzzyfikasi' => $fuzzyfikasi,
+            'inferensi' => $this->inferensi($fuzzyfikasi),
+            'defuzzyfikasi' => $this->defuzzyfikasi($this->inferensi($fuzzyfikasi)),
+        ];
+    }
+
+    public function inferensi($data)
+    {
+        $rule = Rules::all();
+
+        $inferensi = [];
+
+        foreach($rule as $key => $item){
+            $permintaan  = $data['permintaan']['sedikit'];
+            $penjualan  = $data['penjualan']['sedikit'];
+            $persediaan  = $data['persediaan']['sedikit'];
+
+            if($item->r1 == 'sedikit'){
+                $permintaan = $data['permintaan']['sedikit'];
+            }elseif($item->r1 == 'sedang'){
+                $permintaan = $data['permintaan']['sedang'];
+            }elseif($item->r1 == 'banyak'){
+                $permintaan = $data['permintaan']['banyak'];
+            }else{
+                $permintaan  = $data['permintaan']['sedikit'];
+            }
+
+            if($item->r2 == 'sedikit'){
+                $penjualan = $data['penjualan']['sedikit'];
+            }elseif($item->r2 == 'sedang'){
+                $penjualan = $data['penjualan']['sedang'];
+            }elseif($item->r2 == 'banyak'){
+                $penjualan = $data['penjualan']['banyak'];
+            }else{
+                $penjualan  = $data['penjualan']['sedikit'];
+            }
+
+            if($item->r3 == 'sedikit'){
+                $persediaan = $data['persediaan']['sedikit'];
+            }elseif($item->r3 == 'sedang'){
+                $persediaan = $data['persediaan']['sedang'];
+            }elseif($item->r3 == 'banyak'){
+                $persediaan = $data['persediaan']['banyak'];
+            }else{
+                $persediaan  = $data['persediaan']['sedikit'];
+            }
+
+            $index = (int) $key + 1;
+            $predikat = min([$permintaan, $penjualan, $persediaan]);
+            $hasil_predikat = $this->hasilPredikat($predikat, $item->produksi);
+
+            $inferensi[] = [
+                'nama' => 'R'.$index,
+                'permintaan' => $permintaan,
+                'penjualan' => $penjualan,
+                'persediaan' => $persediaan,
+                'predikat' => $predikat,
+                'hasil_predikat' => $hasil_predikat,
+                'perkalian' => $predikat * $hasil_predikat,
+                'produksi' => $item->produksi,
+            ];
+        }
+
+        return $inferensi;
+    }
+
+    public function hasilPredikat($predikat, $produksi)
+    {
+        $var = $this->variable();
+        $min = $var['produksi']['min'];
+        $max = $var['produksi']['max'];
+
+        $hasil = $produksi == 'sedikit' ? $max - ($predikat * ($max - $min)) : $min + ($predikat * ($max - $min));
+
+        return (float) $hasil;
+    }
+
+    public function defuzzyfikasi($inferensi)
+    {
+        $predikat = [];
+        $hasil = [];
+
+        foreach($inferensi as $item){
+            array_push($predikat, $item['predikat']);
+            array_push($hasil, ($item['predikat'] * $item['hasil_predikat']));
+        }
+
+        $defuzzy = array_sum($hasil) / array_sum($predikat);
+        return [
+            'predikat' => array_sum($predikat),
+            'jumlah' => array_sum($hasil),
+            'hasil' => $defuzzy, 
+        ];
+    }
+
     // persediaan
     public function persediaan_sedikit($x)
     {
         $var = $this->variable();
-        return $this->sedikit((int) $this->x, $var['persediaan']['min'], $var['persediaan']['mid'], $var['persediaan']['max']);
+        return $this->sedikit((int) $x, $var['persediaan']['min'], $var['persediaan']['mid'], $var['persediaan']['max']);
     }
 
     public function persediaan_sedang($x)
@@ -202,122 +320,6 @@ class Fuzzy extends Model
         }else{
             return $x;
         }
-    }
-
-    public function getFuzzy($nilai)
-    {
-        
-        $fuzzyfikasi = [
-            'permintaan' => [
-                'sedikit' => $this->permintaan_sedikit($nilai['permintaan']),
-                'sedang' => $this->permintaan_sedang($nilai['permintaan']),
-                'banyak' => $this->permintaan_banyak($nilai['permintaan']),
-            ],
-            'penjualan' => [
-                'sedikit' => $this->penjualan_sedikit($nilai['penjualan']),
-                'sedang' => $this->penjualan_sedang($nilai['penjualan']),
-                'banyak' => $this->penjualan_banyak($nilai['penjualan']),
-            ],
-            'persediaan' => [
-                'sedikit' => $this->persediaan_sedikit($nilai['persediaan']),
-                'sedang' => $this->persediaan_sedang($nilai['persediaan']),
-                'banyak' => $this->persediaan_banyak($nilai['persediaan']),
-            ],
-        ];
-
-        return [
-            'variable' => $this->variable(),
-            'fuzzyfikasi' => $fuzzyfikasi,
-            'inferensi' => $this->inferensi($fuzzyfikasi),
-            'defuzzyfikasi' => $this->defuzzyfikasi($this->inferensi($fuzzyfikasi)),
-        ];
-    }
-
-    public function inferensi($data)
-    {
-        $rule = Rules::all();
-
-        $inferensi = [];
-
-        foreach($rule as $key => $item){
-            $permintaan  = $data['permintaan']['sedikit'];
-            $penjualan  = $data['penjualan']['sedikit'];
-            $persediaan  = $data['persediaan']['sedikit'];
-
-            if($item->r1 == 'sedikit'){
-                $permintaan = $data['permintaan']['sedikit'];
-            }elseif($item->r1 == 'sedang'){
-                $permintaan = $data['permintaan']['sedang'];
-            }elseif($item->r1 == 'banyak'){
-                $permintaan = $data['permintaan']['banyak'];
-            }else{
-                $permintaan  = $data['permintaan']['sedikit'];
-            }
-
-            if($item->r2 == 'sedikit'){
-                $penjualan = $data['penjualan']['sedikit'];
-            }elseif($item->r2 == 'sedang'){
-                $penjualan = $data['penjualan']['sedang'];
-            }elseif($item->r2 == 'banyak'){
-                $penjualan = $data['penjualan']['banyak'];
-            }else{
-                $penjualan  = $data['penjualan']['sedikit'];
-            }
-
-            if($item->r3 == 'sedikit'){
-                $persediaan = $data['persediaan']['sedikit'];
-            }elseif($item->r3 == 'sedang'){
-                $persediaan = $data['persediaan']['sedang'];
-            }elseif($item->r3 == 'banyak'){
-                $persediaan = $data['persediaan']['banyak'];
-            }else{
-                $persediaan  = $data['persediaan']['sedikit'];
-            }
-
-            $index = (int) $key + 1;
-            $predikat = min([$permintaan, $penjualan, $persediaan]);
-
-            $inferensi[] = [
-                'nama' => 'R'.$index,
-                'permintaan' => $permintaan,
-                'penjualan' => $penjualan,
-                'persediaan' => $persediaan,
-                'predikat' => $predikat,
-                'hasil_predikat' => $this->hasilPredikat($predikat, $item->produksi),
-                'produksi' => $item->produksi,
-            ];
-        }
-
-        return $inferensi;
-    }
-
-    public function hasilPredikat($predikat, $produksi)
-    {
-        $var = $this->variable();
-        $min = $var['produksi']['min'];
-        $max = $var['produksi']['max'];
-
-        $hasil = $produksi == 'sedikit' ? $max - ($predikat * ($max - $min)) : ($predikat * ($max - $min)) + $max;
-
-        return (float) $hasil;
-    }
-
-    public function defuzzyfikasi($inferensi)
-    {
-        $predikat = [];
-        $hasil = [];
-
-        foreach($inferensi as $item){
-            array_push($predikat, $item['predikat']);
-            array_push($hasil, ($item['predikat'] * $item['hasil_predikat']));
-        }
-
-        $defuzzy = array_sum($hasil) / array_sum($predikat);
-        return [
-            'predikat' => array_sum($predikat),
-            'jumlah' => array_sum($hasil),
-            'hasil' => $defuzzy, 
-        ];
     }
 
 }
