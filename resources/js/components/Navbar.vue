@@ -9,12 +9,11 @@
 
         <div class="flex items-center">
         
-
                 <div class="flex items-center justify-center space-x-4">
                     <span class="capitalize font-semibold">Administrator</span>
-                    <div class="w-12 h-12 rounded-full overflow-hidden flex justify-center items-center">
+                    <!-- <div class="w-12 h-12 rounded-full overflow-hidden flex justify-center items-center">
                         <img src="user.png" alt="" class="h-full object-cover" />
-                    </div>
+                    </div> -->
                 </div>
 
         </div>

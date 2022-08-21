@@ -1,11 +1,11 @@
 <template>
-    <div class="flex-auto w-full h-full box-border p-6 overflow-hidden flex relative space-x-3">
+    <div class="flex-auto w-full h-full box-border p-3 2xl:p-6 overflow-hidden flex relative space-x-3">
         <div class="h-full w-full bg-white rounded-2xl filter drop-shadow-base">
             <div class="h-1/7 ml-4 flex text-sm text-gray-800 items-center 2xl:text-md">
                 <span class="font-bold">Statistik Produksi Barang</span>
                 <!-- &nbsp;<span>(01-31 Januari 2022)</span> -->
             </div>
-            <div class="h-6/7 w-full pl-3 pr-6 pb-2 box-border overflow-hidden">
+            <div class="2xl:h-6/7 w-full 2xl:pl-3 2xl:pr-6 2xl:pb-2 box-border overflow-hidden">
                 <!-- Chart Here-->
                 <apexchart
                     class="font-medium"

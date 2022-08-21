@@ -27,7 +27,7 @@
         </div>
 
         <div class="w-full h-full box-border overflow-auto flex flex-col bg-white" v-if="isPrediksi == false">
-            <div class="p-8 w-1/2">
+            <div class="p-8 w-full 2xl:w-1/2">
                 <div class="mb-2 border-b">
                     <h1>Masukkan Data yang akan diprediksi</h1>
                 </div>
@@ -57,8 +57,8 @@
         </div>
 
         <div class="w-full h-full box-border overflow-auto bg-white" v-else>
-            <div class="flex items-start justify-between w-full overflow-hidden">
-                <div class="p-4 w-2/5">
+            <div class="flex flex-col lg:flex-row items-start justify-between w-full overflow-hidden">
+                <div class="p-4 w-full lg:w-2/5">
                     <h1 class="font-semibold text-gray-500 mb-3">Fuzzyfikasi</h1>
                     <div class="w-full">
                         <table class="w-full table-auto text-xs 2xl:text-sm mb-14">
@@ -98,7 +98,7 @@
                     </div>
                 </div>
 
-                <div class="p-4 w-2/5">
+                <div class="p-4 w-full lg:w-2/5">
                     <h1 class="font-semibold text-gray-500 mb-3">Nilai Penentu</h1>
                     <div class="w-full">
                         <table class="w-full table-auto text-xs 2xl:text-sm mb-14">
@@ -144,7 +144,7 @@
                     </div>
                 </div>
 
-                <div class="px-4 py-12 w-1/5 flex items-center justify-center flex-col">
+                <div class="px-4 py-12 w-full lg:w-1/5 flex items-center justify-center flex-col">
                     <div class="w-full h-52 bg-blue-500 text-white flex flex-col items-center justify-center text-white font-bold space-y-2">
                         <div>HASIL</div>
                         <div>{{ format(defuzzyfikasi.hasil) }}</div>
