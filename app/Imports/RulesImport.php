@@ -23,17 +23,17 @@ class RulesImport implements ToCollection, WithHeadingRow
             if(!$cek){
                 Rules::create([
                     'nama' => $row['nama'],
-                    'r1' => $row['permintaan'],
-                    'r2' => $row['persediaan'], 
-                    'r3' => $row['penjualan'],
+                    'r1' => $row['penjualan'],
+                    'r2' => $row['permintaan'], 
+                    'r3' => $row['persediaan'],
                     'produksi' => $row['produksi'],
                 ]);
             }else{
                 $cek->update([
                     'nama' => $row['nama'],
-                    'r1' => $row['permintaan'],
-                    'r2' => $row['persediaan'], 
-                    'r3' => $row['penjualan'],
+                    'r1' => $row['penjualan'],
+                    'r2' => $row['permintaan'], 
+                    'r3' => $row['persediaan'],
                     'produksi' => $row['produksi'],
                 ]);
             }

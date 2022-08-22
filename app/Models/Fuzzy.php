@@ -50,25 +50,25 @@ class Fuzzy extends Model
             'persediaan' => [
                 'min' => (int) $persediaan_min,
                 'max' => (int) $persediaan_max,
-                'mid' => round($persediaan_mid),
+                'mid' => $persediaan_mid,
             ],
 
             'permintaan' => [
                 'min' => (int) $permintaan_min,
                 'max' => (int) $permintaan_max,
-                'mid' => round($permintaan_mid),
+                'mid' => $permintaan_mid,
             ],
 
             'penjualan' => [
                 'min' => (int) $penjualan_min,
                 'max' => (int) $penjualan_max,
-                'mid' => round($penjualan_mid),
+                'mid' => $penjualan_mid,
             ],
 
             'produksi' => [
                 'min' => (int) $produksi_min,
                 'max' => (int) $produksi_max,
-                'mid' => round($produksi_mid),
+                'mid' => $produksi_mid,
             ],
         ];
 
@@ -137,28 +137,24 @@ class Fuzzy extends Model
         $inferensi = [];
 
         foreach($rule as $key => $item){
-            $permintaan  = $data['permintaan']['sedikit'];
-            $penjualan  = $data['penjualan']['sedikit'];
-            $persediaan  = $data['persediaan']['sedikit'];
+            $permintaan  = 0;
+            $penjualan  = 0;
+            $persediaan  = 0;
 
             if($item->r1 == 'sedikit'){
-                $permintaan = $data['permintaan']['sedikit'];
+                $penjualan = $data['penjualan']['sedikit'];
             }elseif($item->r1 == 'sedang'){
-                $permintaan = $data['permintaan']['sedang'];
+                $penjualan = $data['penjualan']['sedang'];
             }elseif($item->r1 == 'banyak'){
-                $permintaan = $data['permintaan']['banyak'];
-            }else{
-                $permintaan  = $data['permintaan']['sedikit'];
+                $penjualan = $data['penjualan']['banyak'];
             }
 
             if($item->r2 == 'sedikit'){
-                $penjualan = $data['penjualan']['sedikit'];
+                $permintaan = $data['permintaan']['sedikit'];
             }elseif($item->r2 == 'sedang'){
-                $penjualan = $data['penjualan']['sedang'];
+                $permintaan = $data['permintaan']['sedang'];
             }elseif($item->r2 == 'banyak'){
-                $penjualan = $data['penjualan']['banyak'];
-            }else{
-                $penjualan  = $data['penjualan']['sedikit'];
+                $permintaan = $data['permintaan']['banyak'];
             }
 
             if($item->r3 == 'sedikit'){
@@ -167,8 +163,6 @@ class Fuzzy extends Model
                 $persediaan = $data['persediaan']['sedang'];
             }elseif($item->r3 == 'banyak'){
                 $persediaan = $data['persediaan']['banyak'];
-            }else{
-                $persediaan  = $data['persediaan']['sedikit'];
             }
 
             $index = (int) $key + 1;
@@ -197,6 +191,7 @@ class Fuzzy extends Model
         $max = $var['produksi']['max'];
 
         $hasil = $produksi == 'sedikit' ? $max - ($predikat * ($max - $min)) : $min + ($predikat * ($max - $min));
+        // $hasil = $produksi == 'sedikit' ? 1 : 0;
 
         return (float) $hasil;
     }

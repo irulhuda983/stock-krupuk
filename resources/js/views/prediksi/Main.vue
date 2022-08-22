@@ -27,7 +27,7 @@
         </div>
 
         <div class="w-full h-full box-border overflow-auto flex flex-col bg-white" v-if="isPrediksi == false">
-            <div class="p-8 w-full 2xl:w-1/2">
+            <div class="p-8 w-full lg:w-1/2">
                 <div class="mb-2 border-b">
                     <h1>Masukkan Data yang akan diprediksi</h1>
                 </div>
@@ -159,8 +159,8 @@
                         <tr class="relative border-b shadow-md sticky top-0">
                             <th class="p-3 whitespace-nowrap capitalize text-left sticky top-0 bg-white">No.</th>
                             <th class="p-3 whitespace-nowrap capitalize text-left sticky top-0 bg-white">Rule</th>
-                            <th class="p-3 whitespace-nowrap capitalize text-left sticky top-0 bg-white">Permintaan</th>
                             <th class="p-3 whitespace-nowrap capitalize text-left sticky top-0 bg-white">Penjualan</th>
+                            <th class="p-3 whitespace-nowrap capitalize text-left sticky top-0 bg-white">Permintaan</th>
                             <th class="p-3 whitespace-nowrap capitalize text-left sticky top-0 bg-white">Persediaan</th>
                             <th class="p-3 whitespace-nowrap capitalize text-left sticky top-0 bg-white">ai</th>
                             <th class="p-3 whitespace-nowrap capitalize text-left sticky top-0 bg-white">zi</th>
@@ -171,8 +171,8 @@
                         <tr v-for="(item, i) in inferensi" :key="i">
                                 <td width="2%" class="px-3 py-4 border-b border-gray-200 whitespace-nowrap capitalize font-semibold">{{ i + 1 }}.</td>
                                 <td class="px-3 py-4 border-b border-gray-200 whitespace-nowrap capitalize">{{ item.nama }}</td>
-                                <td class="px-3 py-4 border-b border-gray-200 whitespace-nowrap capitalize">{{ format(item.permintaan) }}</td>
                                 <td class="px-3 py-4 border-b border-gray-200 whitespace-nowrap capitalize">{{ format(item.penjualan) }}</td>
+                                <td class="px-3 py-4 border-b border-gray-200 whitespace-nowrap capitalize">{{ format(item.permintaan) }}</td>
                                 <td class="px-3 py-4 border-b border-gray-200 whitespace-nowrap capitalize">{{ format(item.persediaan) }}</td>
                                 <td class="px-3 py-4 border-b border-gray-200 whitespace-nowrap capitalize">{{ format(item.predikat) }}</td>
                                 <td class="px-3 py-4 border-b border-gray-200 whitespace-nowrap capitalize">{{ format(item.hasil_predikat) }}</td>

@@ -1,6 +1,6 @@
 <template>
     <div
-        class="flex-auto w-full h-full box-border p-6 2xl:overflow-hidden flex flex-col relative"
+        class="flex-auto w-full h-full box-border p-6 lg:overflow-hidden flex flex-col relative"
     >
         <div class="mb-5 w-full box-border flex items-center justify-between">
             <div class="font-bold text-gray-600 text-lg 2xl:text-2xl">
@@ -26,8 +26,8 @@
             </div>
         </div>
 
-        <div class="w-full box-border flex flex-col 2xl:flex-row justify-between items-center mb-5">
-            <div class="w-full 2xl:w-1/2 relative flex items-center mb-3 2xl:mb-0">
+        <div class="w-full box-border flex flex-col lg:flex-row justify-between items-center mb-5">
+            <div class="w-full lg:w-1/2 relative flex items-center mb-3 2xl:mb-0">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="h-4 w-4 absolute text-gray-600 left-4"
@@ -104,10 +104,10 @@
         </div>
 
         <div
-            class="w-full h-full box-border overflow-auto flex flex-col bg-white pb-32 2xl:pb-16"
+            class="w-full h-full box-border overflow-auto flex flex-col bg-white pb-32 lg:pb-16"
         >
             <!-- <div class="w-full h-full box-border overflow-auto flex flex-col bg-white"> -->
-            <table class="w-full table-auto text-xs 2xl:text-sm mb-14">
+            <table class="w-full table-auto text-xs lg:text-sm mb-14">
                 <thead class="font-semibold text-gray-500">
                     <tr class="relative border-b shadow-md sticky top-0">
                         <th
@@ -328,7 +328,7 @@
             <!-- </div> -->
 
             <div
-                class="fixed 2xl:absolute bottom-0 right-0 left-0 box-border overflow-hidden 2xl:p-6 text-sm 2xl:pl-3 z-50"
+                class="fixed lg:absolute bottom-0 right-0 left-0 box-border overflow-hidden lg:p-6 text-sm lg:pl-3 z-50"
             >
                 <div
                     v-if="lastPage > 1"
